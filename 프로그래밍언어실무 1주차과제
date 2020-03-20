@@ -1,0 +1,21 @@
+include <stdio.h>
+
+int main(void)
+{
+prinf("1)");
+prinf("\n");
+prinf("■■■■■ \n");
+prinf("■■ \n");
+prinf("■■ \n");
+prinf("■■■■■ \n");
+
+prinf("2)");
+prinf("\n");
+prinf("△ \n");
+prinf("△△ \n");
+prinf("△△△ \n");
+prinf("△△△△\n");
+prinf("△△△△△\n");
+
+return 0;
+}

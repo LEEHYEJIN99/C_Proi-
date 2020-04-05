@@ -1,0 +1,339 @@
+1. 가로방향의 구구단을 출력하되 아무키나 누르면 화면을 지우고 다음 단을 출력하는 프로그램을 작성하기. 
+#include<stdio.h>
+#include<stdlio.h>
+#include<conio.h>
+
+int main(void)
+{
+	for (int i=0; i<9; i++)
+	{
+		for (int j=0; j<9; i++)
+		{
+			printf("%d*%d=%d\t", i+1, j+1, (i+1)*(j+1));
+		}
+		printf("\n");
+		printf("아무키나 누르시오");
+		getch();
+		system("cls")
+	}
+	return 0;
+}
+
+2. 화살표 키를 눌러 숫자를 증가시키거나 감소시키는 프로그램을 작성하기.
+기본 숫자 1000에 대해 위쪽 방향 화살표 키를 입력하면 숫자를 증가시키고, 아래쪽 방향 화살표 키를 입력하면 숫자를 감소한다.
+왼쪽 방향 화살표 키와 오른쪽 방향 화살표키는 감소하거나 증가시킬 단위를 조절하도록 하기.
+#include<stdio.h>
+#include<conio.h>
+#include<windows.h>
+#define X_MAX 79 //가로 (열) 방향의 최대값
+#define Y_MAX 24 //세로 (행) 방향의 최대값
+
+void gotoxy(int x, int y);
+void move_arrow_key(chra key, int *x, int *y, int x_b, int y_b);
+
+int main(void)
+{
+	char key;
+	int x = 100;
+	int y = 10;
+	do
+	{
+		gotoxy(x, y);
+		printf("증가/감소 시키는 단위: %d", y);
+		key=getch();
+		move_arrow_key(key, &x, &y);
+	}while(key!=27);
+	return 0;
+}
+
+void gotoxy(int x, int y);
+{
+	COORD Pos = {x - 1, y - 1};
+	setConsoleCursorPosition(GetstdHandle(STD_OUTPUT_HANDLE), Pos);
+}
+
+void move_arrow_key(char key, int *x, int *y, int x_b, int y_b);
+{
+	switch (key)
+	{
+	case 72: //위쪽(상) 방향의 화살표 키 입력
+		*y1=*y1-1;
+		if (*y1<1) *y1=1; //y좌표의 최소값
+		break;
+	case 75: //왼쪽(좌) 방향의 화살표 키 입력
+		*x1=*x1-1;
+		if (*x1<1) *x1=1; //x좌표의 최소값
+		break;
+	case 77: //오른쪽(우) 방향의 화살표 키 입력
+		*x1=*x1+1;
+		if (*x1>x_b) *x1=x_b; //x좌표의 최대값
+		break;
+	case 80: //아래쪽(하) 방향의 화살표 키 입력
+		*y1=*y1+1;
+		if (*y1>y_b) *y1=y_b; //y좌표의 최대값
+		break;
+	default:
+		return;
+	}
+}
+
+3. 다음과 같은 메뉴에 의해 실제 값을 입력받아 해당 연산을 처리하는 프로그램을 작성하시오.
+
+메인메뉴 서브메뉴
+1. 사칙연산 1.1 덧셈 연산 1.2 뺄셈 연산
+1.3 나눗셈 연산 1.4 곱셈 연산
+1.5 나머지 연산 1.6 메인 메뉴로 이동
+
+2. 로그 연산 2.1 자연로그 연산 2.2 상용로그 연산
+2.3 메인 메뉴로 이동
+
+3. 종료
+
+#include<stdio.h>
+#include<stdlio.h>
+#include<conio.h>
+#include<math.h>
+
+int menu_display(void);
+int sub_menu_display01(void);	//사칙연산에 대한 서브메뉴 출력과 번호 입력
+int sub_menu_display02(void);	//로그연산 대한 서브메뉴 출력과 번호 입력
+void sub_main01(void);		//사칙연산에 대한 서브 메뉴 제어
+void sub_main02(void);		//로그연산에 대한 서브 메뉴 제어
+
+void add(void); 		//덧셈 연산
+void subtract(void);	//뺄셈 연산
+void divide(void);		//나눗셈 연산
+void multiply(void);	//곱셈 연산
+void reamin(void);		//나머지 연산
+
+void naturallog(void);		//자연로그 연산
+void commerciallog(void);	//상용로그 연산
+
+int main(void);
+{
+	int c;
+	while((c = menu_display())!=3)
+	{
+		switch (c)
+		{
+			case 1 : sub_main01();
+				break;
+			case 2 : sub_main02();
+				break;
+			default : break;
+		}
+	}
+	return 0;
+}
+
+int menu_display(void);
+{
+	int select;
+	system("cls");
+	printf("1.사칙 연산 \n");
+	printf("2.로그 연산 \n");
+	printf("3.프로그램 종료 \n");
+	printf("메뉴번호 입력>");
+	select=getch()-48;
+	return select;
+}
+
+void sub_main01(void);
+{
+	int c;
+
+	while((c=sub_menu_display01())!=3)
+	{
+		switch(c)
+		{
+			case 1 : add();
+				break;
+			case 2 : subtract();
+				break;
+			case 3 : divide();
+				break;
+			case 4 : multiply();
+				break;
+			case 5 : reamin();
+				break;
+			default : break;
+		}
+	}
+	return 0;	
+}
+
+void sub_main02(void);
+{
+	int c;
+
+	while((c=sub_menu_display01())!=3)
+	{
+		switch(c)
+		{
+			case 1 : naturallog();
+				break;
+			case 2 : commerciallog();
+				break;
+			default : break;
+		}
+	}
+	return 0;	
+}
+
+int sub_menu_display01(void)
+{
+	int select;
+	system("cls");
+	printf("1.사칙연산/n");
+	printf("1.1 덧셈 연산/n");
+	printf("1.2 뺄셈 연산/n");
+	printf("1.3 나눗셈 연산/n");
+	printf("1.4 곱셈 연산/n");
+	printf("1.5 나머지 연산/n");
+	printf("1.6 메인 메뉴로 이동/n");
+	select = getch() - 48;
+	return select;
+}
+
+int sub_menu_display02(void)
+{
+	int select;
+	system("cls");
+	printf("2.로그 연산/n");
+	printf("2.1 자연로그 연산/n");
+	printf("2.2 상용로그 연산/n");
+	printf("2.3 메인 메뉴로 이동/n");
+	select = getch() - 48;
+	return select;
+}
+
+void add(void)
+{
+	int a, b
+	system("cls");
+	printf("두 정수 입력: ");
+	printf("%d+%d=%d\n", a, b, a+b);
+	press_any_key();
+}
+
+void subtract(void)
+{
+	int a, b
+	system("cls");
+	printf("두 정수 입력: ");
+	printf("%d-%d=%d\n", a, b, a-b);
+	press_any_key();
+}
+
+void divide(void)
+{
+	int a, b
+	system("cls");
+	printf("두 정수 입력: ");
+	printf("%d/%d=%d\n", a, b, a/b);
+	press_any_key();
+}
+
+void multiply(void)
+{
+	int a, b
+	system("cls");
+	printf("두 정수 입력: ");
+	printf("%d*%d=%d\n", a, b, a*b);
+	press_any_key();
+}
+
+void remain(void)
+{
+	int a, b
+	system("cls");
+	printf("두 정수 입력: ");
+	printf("(%d)%(%d)=%d\n", a, b, a%b);
+	press_any_key();
+}
+
+void press_any_key(void)
+{
+	printf("\n\n");
+	printf("아무키나 누르면 메인 메뉴로 돌아갑니다!");
+	getch();
+}
+
+void naturallog(void)
+{
+	double a;
+	printf("숫자 입력: ");
+	printf("%f를 자연로그연산 시키면 %f\n", a, log(a));
+	press_any_key();
+}
+
+void naturallog(void)
+{
+	double b;
+	printf("숫자 입력: ");
+	printf("%f를 자연로그연산 시키면 %f\n", a, log10(b));
+	press_any_key();
+}
+
+4. 함수 rand를 이용하여 1~6 사의 주사위 눈금 1,000개를 생성하고, 각 눈금의 빈도수에 대한 확률을 계산하기.
+#include<stdio.h>
+#include<stdlio.h>
+#include<time.h>
+
+int main(void)
+{
+	int i[1000];
+	int graduation[6]		//눈금 배열
+	srand(time(NULL));
+	for (int i=0, i<1000; i++)
+	{
+		switch(arr[i]){
+			case 1:
+					graduation[0]++;
+					break;
+			case 2:
+					graduation[1]++;
+					break;
+			case 3:
+					graduation[2]++;
+					break;
+			case 4:
+					graduation[3]++;
+					break;
+			case 5:
+					graduation[4]++;
+					break;
+			case 6:
+					graduation[5]++;
+					break;
+		}
+	}
+	for (int i=1; i<6; i++)
+	{
+		printf("%2d:%d\n",i, rand()%6+1);
+		retrun 0;
+	}
+}
+
+5.가변 인수를 사용하는 다음의 함수를 작성하기.
+1) 인수들의 평균을 계산하는 함수 mean
+2) 인수들의 중위수를 계산하는 함수 median
+3) 인수들을 오름차순으로 정렬하는 함수 ascending_sort
+4) 인수로 사용된 여러 개의 문자열을 하나의 문자열로 합치는 함수 concatnate_str
+
+#include<stdio.h>
+#include<stdarg.h>
+#include<string.h>
+
+double mean(int num, ...);	//평균구하기
+double median(int count, ...)	//중위수 구하기
+void ascending_sort(int a, int b);	//오름차순 정렬하기
+void concatnate_str(int num, ...);	//하나의 문자열로 합치기
+
+int main(void)
+{
+	printf("평균: %1f\n", mean(1,2,3,4,5,6,7));
+	printf("중위수: %1f\n", median(1,2,3,4,5,6,7));
+	printf("오름차순: %1f\n", ascending_sort(1,2,3,4,5,6,7));
+	printf("문자열 합치기: ", concatnate_str(1,2,3,4,5,6,7));
+}

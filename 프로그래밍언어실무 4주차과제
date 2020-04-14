@@ -1,0 +1,243 @@
+1. 입력한 10진 정수에 대해 진수(2, 8, 16)별로 변환하여 출력하는 프로그램을 작성하시오.
+
+#include <stdio.h>
+
+long dec_to_bin(long n);
+long dec_to_octal(long n);
+char hexa(int n);
+void det_to_hexa(long n);
+
+int main(void)
+{
+	long number;
+	int sel;
+	printf("10진 정수 입력: \n");
+	scanf("%|d", &sel);
+	prinft("\n");
+	switch (sel)
+	{
+	case 1:
+		printf("%|d를 2진수로 바꾸면 %|d\n", number, dec_to_bin(number));
+		break;
+	case 2:
+		printf("%|d를 8진수로 바꾸면 %|d\n", number, dec_to_bin(number));
+		break;
+	case 3:
+		printf("%ID를 16진수로 바꾸면 %|d\n", number, dec_to_bin(number));
+		break;
+	default:
+		printf("숫자를 잘 못 입력하셨습니다\n");
+		retrun-1;
+		}
+		return 0;
+}
+
+
+//10진수를 8진수로 변환하기
+long dec_to_octal(long n)
+{
+	if(n<=7)
+		return n;
+	retrun dec_to_octal(n/8)*10+n%8;
+}
+
+2. 입력한 2진수를 각각 10진수와 8진수로 변환하는 함수와 프로그램을 작성하시오.
+
+#include <stdio.h>
+#include <string.h>
+#include <math.h>
+
+long bin_to_dec(char num[]);
+long dec_to_octal(long n);
+
+int main(void)
+{
+	char num[20]; //2진수를 넣어줄 배열
+	printf("2진수 입력: ");
+	scanf("%s", num);
+	printf("10진수로 전환하면: %|d\n", bint_to_dec(num));
+	printf("8진수로 전환하면: %|d\n", bint_to_octal(num));
+	retrun 0;
+}
+
+long dec_to_octal(long n)
+{
+	if(n <= 7)
+		retrun i;
+	retrun dec_to_octal(n / 8) * 10 + n % 8;
+}
+
+3. 집합 A와 집합 B에 대한 곱집합 AXB를 출력하는 프로그램을 작성하시오.
+
+#include <stdio.h>
+
+int multiply(int a[], int s_a, int b[], int result[]);
+
+int main(void)
+{
+	int a[] = { 1, 3, 5, 6};
+	int b[] = { 3, 5, 8, 9, 10};
+	int result[20];
+	int count, i, size_a, size_b;
+	size_a = sizeof(a) / sizeof(int);
+	size_b = sizeof(b) / sizeof(int);
+	count = multiply(a, size_a, b, size_b, result);
+	for (i = 0; i < count; i++)
+		printf("%d \n", result[i]);
+		retrun 0;
+}
+
+4. 임의의 행과 열을 갖는 두 행렬의 곱을 계산하는 함수를 작성하시오.
+예를 들어 3X5의 행렬과 5X4의 행렬을 곱하여 3X4의 행렬을 출력합니다.
+
+#include <stdio.h>
+void multiply_matrix(int **ma, int **mb, int row1, int col1, int row2, int col2); //두 행렬의 곱의 값을 나타내기 
+void print_matrix(int **m, int row_size, int col_size); //값, 행, 열 나타내기
+
+int main(void)
+{
+	int **a, **b;
+	int row1, row2=1, col1=0; col2;
+	srand((unsigned)time(NULL));
+	while(col1 != row2)
+	{
+		printf("첫번째 행렬의 행과 열을 입력: \n");
+		scanf("%d %d", &row1, &col1);
+		printf("\n 두번째 행렬의 행은 첫 번째 행렬의 열과 동일해야 합니다.\n")
+		printf("일치하지 않다면 다시 입력하십시오.:  \n\n");
+		printf("두번째 행렬의 행과 열을 입력: ");
+		scanf("%d %d", &row2, &col2);
+	}
+	a = (int**)malloc(sizeof(int*)*row1);
+	for (int i=0; i<row1; i++)
+	{
+		a[i] = (int*)malloc(sizeof(int)*col1);
+	}
+	b = (int**)malloc(sizeof(int*)*row2);
+	for (int i=0; i<row2; i++)
+	{
+		b[i] = (int*)malloc(sizeof(int)*col2);
+	}
+	for (int i=0; i<row1; i++)
+	{
+		for (int j = 0; j < col; i++)
+		{
+			a[i][j] = rand() % 10;
+		}
+	}
+	printf("\n a 배열 출력 \n");
+	print_matrix(a, row1, col1);
+
+	printf("b 배열 출력 \n");
+	print_matrix(b, row2, col2);
+
+	retrun 0;
+}
+
+5. 천만원을 연 이율 0.1을 적용하여 1년마다 복리로 10년간 예금한다고 할 때 원리합계를 계산하시오.
+hint : 10년 후의 원리합계는 원금의 (1+0.1)10배가 된다.
+
+#include <stido.h>
+#include <stdlib.h>
+#include <math.h>
+
+int main(void)
+{
+	double principle rate; //원금 이자율
+	double *income; //수익
+	int year;
+
+	printf("원금: ");
+	scanf("%1f", &principle);
+
+	printf("이자율: ");
+	scanf("%1f", &rate);
+
+	printf("기간: ");
+	scanf("%d", &year);
+
+	free(income);
+	return 0;
+}
+
+6. 10000원 미만의 금액을 입력받아 10원, 50원, 100원, 500원 동전을 최소한 한번씩은 이용하여 입력된 금액을 나타내되 동전의 개수가 최소가 되는 조합을 구하는 프로그램을 작성하시오. 예를 들어 1500원을 입력하면 다음과 같이 출력합니다.
+500원 : 2개
+100원 : 4개
+50원 : 1개
+10원 : 5개
+
+#include <stdio.h>
+
+void printCoin(in coin[4], int money);
+
+int main(void)
+{
+	int coin[4] = { 500, 100, 50, 10 }; //500원, 100원, 50원, 10원
+	int money;
+
+	printf("금액 입력: ");
+	scanf("%d", &money);
+	printCoin(coin, money-(500 + 100 + 50 + 10)); //동전들을 최소 한번씩 사용하기
+	retrun 0;
+}
+
+void printCoin(int coin[4], int money)
+{
+	int result[4] = { 0, 0, 0, 0 };
+	printf("500원:%d\n100원:%d\n50원:%d\n10원:%d\n", result[0] + 1, result[1] + 1, result[2] + 1, result[3] + 1);
+}
+
+7. 아래의 그림과 같은 파스칼의 삼각형을 출력하는 프로그램을 작성하시오.
+hint : 파스칼의 삼각형을 출력하려면 이항계수를 이용합니다.
+
+#include <stdio.h>
+
+int Factorial(int n);
+int Combination(int n, int r);
+void Pascal(int n);
+
+int main(void)
+{
+        int size;
+        printf("삼각형 크기 입력: ");
+        scanf("%d", &size);
+        Pascal(size);
+        return 0;
+}
+
+8. 다음은 우리나라에 "작은 별"로 알려진 "Twinkle, twinkle, little star" 가사의 일부분입니다. 가사 부분을 다음과 같이 텍스트 파일(plaintext.txt)로 저장한 다음 Caesar 암호문, 단순 전치 암호문, XOR 암호문으로 변환한 텍스트 파일을 생성하시오.
+Twinkle, twinkle, little star. How I wonder what you are.
+Up above the world so high. Like a diamond in the sky.
+Twinkle, twinkle, little star. How I wonder what you are.
+
+#include<stido.h>
+#include<string.h>
+#include<windows.h>
+
+int main(void)
+{
+	char str[3][57]; //plain text가 3줄
+        FILE *fp = fopen("C:\\plaintext.txt", "r");
+        printf("Caesar 암호문\n");
+        printf("Plain Text\n");
+        for (int i = 0; i < 3; i++)
+        {
+               for (int j = 0; j < 57; j++)
+               {
+                       fscanf(fp, "%c", &str[i][j]); //읽어오고
+                       printf("%c", str[i][j]); //출력
+               }
+        }
+        printf("\n\n");
+        printf("Plain Text Caesar 암호화\n");
+
+        printf("단순 전치 암호문\n");
+        printf("Plain Text\n");
+
+        printf("XOR 암호문\n");
+        printf("Plain Text\n");
+
+        printf("\n");
+        fclose(fp);
+        retrun 0;
+}

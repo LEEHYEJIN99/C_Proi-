@@ -26,7 +26,7 @@ int main()
 void make_card(struct trump m_card[])
 {
 	int i,j;
-	char shape[4][3] = { "¢¼", "¡ß", "¢¾", "¢À"};
+	char shape[4][3] = { "Ë˜Åº", "Ä„ÃŸ", "Ë˜Å¾", "Ë˜Å”"};
 	for(i=0;i<4;i++)
 	{
 		for(j=i*13; j<i*13+13; j++)
@@ -78,7 +78,7 @@ void shuffle_card(struct trump m_card[])
 {
 	int i, rnd;
 	struct trump temp;
-	srand(time(NULL)); //³­¼öÀÇ ÃÊ±âÈ­ 
+	srand(time(NULL)); //Å‚Â­ÅºÃ¶Å”Ã‡ Ä‚Ä˜Ä…Ã¢ÄŒÂ­ 
 	for(i=0; i<52; i++) 
 	{
 		rnd=rand()%52;
